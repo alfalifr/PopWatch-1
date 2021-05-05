@@ -1,11 +1,8 @@
 package com.mellagusty.movieapppopcorn
 
-import androidx.core.content.MimeTypeFilter.matches
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
@@ -16,9 +13,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
-
 import org.junit.Test
-import java.util.regex.Pattern.matches
 
 class MainActivityTest {
 
@@ -49,7 +44,7 @@ class MainActivityTest {
         onView(withId(R.id.rv_card)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 1,
-                ViewActions.click()
+                click()
             )
         )
         //Testing the Details
@@ -80,7 +75,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun getTVShow(){
+    fun getTVShow() {
         //Click to the Movie Navigation
         onView(withId(R.id.navigation_TvShow)).perform(click())
 
@@ -92,7 +87,7 @@ class MainActivityTest {
         onView(withId(R.id.rv_card)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 2,
-                ViewActions.click()
+                click()
             )
         )
 
@@ -129,7 +124,15 @@ class MainActivityTest {
         tvStar.perform(ViewActions.scrollTo())
         tvStar.check(ViewAssertions.matches(isDisplayed()))
 
+    }
 
+    @Test
+    fun getFavorite() {
+        //Click to the Movie Navigation
+        onView(withId(R.id.navigation_favorite)).perform(click())
+
+        val ivMaintenance = onView(withId(R.id.iv_maintenance))
+        ivMaintenance.check(ViewAssertions.matches(isDisplayed()))
     }
 
 }

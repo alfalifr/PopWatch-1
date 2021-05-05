@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
+                android:contentDescription="@string/backarrow"
                 android:src="@drawable/ic_arrow_back" />
 
         </FrameLayout>
@@ -48,6 +49,7 @@
             android:layout_margin="20dp"
             android:src="@drawable/ic_base_detail"
             app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/corner"
             app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
 
         <TextView
@@ -69,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:src="@drawable/ic_base_detail1"
+            android:contentDescription="@string/corner"
             app:layout_constraintStart_toEndOf="@id/iv_base_detail"
             app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
 
@@ -89,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:src="@drawable/ic_base_detail2"
+            android:contentDescription="@string/corner"
             app:layout_constraintStart_toEndOf="@id/iv_base_detail1"
             app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
 
@@ -111,6 +115,7 @@
             android:layout_margin="20dp"
             android:src="@drawable/ic_base_detail3"
             app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/corner"
             app:layout_constraintTop_toBottomOf="@+id/iv_base_detail" />
 
         <TextView
@@ -133,6 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:src="@drawable/ic_base_detail4"
+            android:contentDescription="@string/corner"
             app:layout_constraintStart_toEndOf="@id/iv_base_detail3"
             app:layout_constraintTop_toBottomOf="@+id/iv_base_detail2" />
 
@@ -163,6 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:src="@drawable/ic_star_rate"
+            android:contentDescription="@string/corner"
             app:layout_constraintTop_toBottomOf="@id/tv_genres"
             app:layout_constraintStart_toStartOf="parent"/>
 

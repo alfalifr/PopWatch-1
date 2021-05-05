@@ -1,4 +1,4 @@
-package com.mellagusty.movieapppopcorn.data
+package com.mellagusty.movieapppopcorn.data.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,6 +6,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class TvShowPosterDetail(
+
+    @field: SerializedName("id")
+    val id :Int,
 
     @field: SerializedName("original_name")
     val original_name: String,

@@ -1,4 +1,4 @@
-package com.mellagusty.movieapppopcorn.data
+package com.mellagusty.movieapppopcorn.data.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -48,13 +48,7 @@ class ProductionCompany(
     val id: Int,
 
     @field: SerializedName("name")
-    val name: String? = null,
-
-    @field: SerializedName("logo_path")
-    val logoPath: String? = null,
-
-    @field: SerializedName("origin_country")
-    val origin_country: String? = null
+    val name: String? = null
 ) : Parcelable
 
 

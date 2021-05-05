@@ -6,13 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.mellagusty.movieapppopcorn.adapter.PopWatchAdapter
 import com.mellagusty.movieapppopcorn.databinding.FragmentMovieBinding
@@ -21,12 +18,12 @@ class MovieFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieBinding
     private lateinit var movieViewModel: MovieViewModel
-    private lateinit var adapter : PopWatchAdapter
+    private lateinit var adapter: PopWatchAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = FragmentMovieBinding.inflate(inflater, container, false)
         return binding.root
@@ -44,9 +41,9 @@ class MovieFragment : Fragment() {
     }
 
     private fun observeMainViewModel() {
-        movieViewModel.getNowPlayingMovie().observe(viewLifecycleOwner, Observer { movie ->
+        movieViewModel.getNowPlayingMovie().observe(viewLifecycleOwner, { movie ->
             Log.d("Movie Fragment", movie[0].id)
-            if (movie != null){
+            if (movie != null) {
                 adapter.setListData(movie)
                 showLoading(false)
             }
@@ -55,8 +52,9 @@ class MovieFragment : Fragment() {
     }
 
     private fun showRecycleCard() {
-        binding.rvCard.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        adapter = PopWatchAdapter{
+        binding.rvCard.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        adapter = PopWatchAdapter {
             //intent for click data card
             val intent = Intent(requireContext(), MovieDetailActivity::class.java)
             intent.putExtra(MovieDetailActivity.EXTRA_MOVIE, it)

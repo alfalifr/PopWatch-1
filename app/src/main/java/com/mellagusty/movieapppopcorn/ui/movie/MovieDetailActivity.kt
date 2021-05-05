@@ -2,10 +2,9 @@ package com.mellagusty.movieapppopcorn.ui.movie
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.mellagusty.movieapppopcorn.data.Poster
+import com.mellagusty.movieapppopcorn.data.remote.Poster
 import com.mellagusty.movieapppopcorn.databinding.ActivityMovieDetailBinding
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -35,7 +34,7 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        movieDetailViewModel.gerDetailMovie().observe(this, Observer { moviedetail ->
+        movieDetailViewModel.gerDetailMovie().observe(this, { moviedetail ->
             binding.tvLanguage.text = moviedetail.original_language
             binding.tvGenres.text = moviedetail.genres.joinToString { it.name }
             binding.tvOriginalName.text = moviedetail.original_title

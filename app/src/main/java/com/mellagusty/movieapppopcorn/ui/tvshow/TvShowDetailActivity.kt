@@ -1,15 +1,11 @@
 package com.mellagusty.movieapppopcorn.ui.tvshow
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.mellagusty.movieapppopcorn.data.Poster
+import com.mellagusty.movieapppopcorn.data.remote.Poster
 import com.mellagusty.movieapppopcorn.databinding.ActivityTvShowDetailBinding
-import com.mellagusty.movieapppopcorn.ui.movie.MovieDetailActivity
-import com.mellagusty.movieapppopcorn.ui.movie.MovieViewModel
-import com.mellagusty.movieapppopcorn.ui.tvshow.TvShowDetailActivity.Companion.EXTRA_TV
 
 class TvShowDetailActivity : AppCompatActivity() {
 
@@ -39,7 +35,7 @@ class TvShowDetailActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        tvShowModel.getDetailTVShow().observe(this, Observer { tvdetail ->
+        tvShowModel.getDetailTVShow().observe(this, { tvdetail ->
             binding.tvLanguage.text = tvdetail.original_language
             binding.tvType.text = tvdetail.type
             binding.tvStatus.text = tvdetail.status
@@ -50,12 +46,12 @@ class TvShowDetailActivity : AppCompatActivity() {
             binding.tvTagline.text = tvdetail.tagline
             binding.tvOverview.text = tvdetail.overview
             Glide.with(this)
-                .load(tvdetail.baseUrl+tvdetail.poster_path)
+                .load(tvdetail.baseUrl + tvdetail.poster_path)
                 .into(binding.ivTvDetail)
         })
     }
 
-    companion object{
+    companion object {
         const val EXTRA_TV = "extra_tv"
     }
 }

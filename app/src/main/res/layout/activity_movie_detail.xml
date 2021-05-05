@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
+                android:contentDescription="@string/backarrow"
                 android:src="@drawable/ic_arrow_back" />
 
         </FrameLayout>
@@ -47,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:src="@drawable/ic_base_detail"
+            android:contentDescription="@string/corner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
 
@@ -63,37 +65,16 @@
             app:layout_constraintTop_toTopOf="@+id/iv_base_detail"
             tools:text="en" />
 
-        <ImageView
-            android:id="@+id/iv_base_detail1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_base_detail3"
-            app:layout_constraintStart_toEndOf="@id/iv_base_detail"
-            app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
-
-        <TextView
-            android:id="@+id/tv_genres"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:ellipsize="end"
-            app:layout_constraintBottom_toBottomOf="@id/iv_base_detail1"
-            app:layout_constraintEnd_toEndOf="@id/iv_base_detail1"
-            app:layout_constraintStart_toStartOf="@id/iv_base_detail1"
-            app:layout_constraintTop_toTopOf="@+id/iv_base_detail1"
-            tools:text="Drama" />
 
         <ImageView
             android:id="@+id/iv_base_detail2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_margin="20dp"
+            android:contentDescription="@string/corner"
             android:src="@drawable/ic_base_detail2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_language" />
+            app:layout_constraintStart_toEndOf="@+id/iv_base_detail"
+            app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
 
         <TextView
             android:id="@+id/tv_status"
@@ -112,9 +93,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            android:contentDescription="@string/corner"
             android:src="@drawable/ic_star_rate"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_status" />
+            app:layout_constraintStart_toEndOf="@id/iv_base_detail2"
+            app:layout_constraintTop_toBottomOf="@id/frame_layout" />
 
         <TextView
             android:id="@+id/tv_star"
@@ -124,8 +106,22 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/iv_star"
-            app:layout_constraintTop_toBottomOf="@+id/tv_status"
+            app:layout_constraintTop_toBottomOf="@+id/frame_layout"
             tools:text="8.6" />
+
+        <TextView
+            android:id="@+id/tv_genres"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_base_detail"
+            tools:text="Drama" />
 
         <TextView
             android:id="@+id/tv_original_name"
@@ -137,7 +133,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_star"
+            app:layout_constraintTop_toBottomOf="@id/tv_genres"
             tools:text="Grey's Anatomy" />
 
         <TextView

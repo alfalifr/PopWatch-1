@@ -1,9 +1,8 @@
-package com.mellagusty.movieapppopcorn.api
+package com.mellagusty.movieapppopcorn.data.remote.api
 
 import com.mellagusty.movieapppopcorn.BuildConfig
-import com.mellagusty.movieapppopcorn.data.MoviePosterDetail
-import com.mellagusty.movieapppopcorn.data.Poster
-import com.mellagusty.movieapppopcorn.data.TvShowPosterDetail
+import com.mellagusty.movieapppopcorn.data.remote.MoviePosterDetail
+import com.mellagusty.movieapppopcorn.data.remote.TvShowPosterDetail
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -22,7 +21,7 @@ interface Api {
     //get Detail Movies
     @GET("movie/{movie_id}?api_key=$API_KEY")
     fun getDetailMovie(
-            @Path("movie_id")query: String
+        @Path("movie_id") query: String
     ): Call<MoviePosterDetail>
 
     //TvShow
@@ -33,6 +32,6 @@ interface Api {
     //get Detail TvShow
     @GET("tv/{tv_id}?api_key=$API_KEY")
     fun getDetailTvShow(
-        @Path("tv_id")query: String
+        @Path("tv_id") query: String
     ): Call<TvShowPosterDetail>
 }

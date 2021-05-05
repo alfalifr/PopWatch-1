@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mellagusty.movieapppopcorn.R
-import com.mellagusty.movieapppopcorn.data.Poster
+import com.mellagusty.movieapppopcorn.data.remote.Poster
 import com.mellagusty.movieapppopcorn.databinding.ItemListContainerBinding
 
 class PopWatchAdapter(private val listener: (Poster) -> Unit) :
