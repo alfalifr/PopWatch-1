@@ -1,11 +1,14 @@
 package com.mellagusty.movieapppopcorn.ui.tvshow
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.mellagusty.movieapppopcorn.data.remote.Poster
 import com.mellagusty.movieapppopcorn.databinding.ActivityTvShowDetailBinding
+import com.mellagusty.movieapppopcorn.ui.movie.MovieViewModel
+import com.mellagusty.movieapppopcorn.viewmodel.PopViewModelRequest
 
 class TvShowDetailActivity : AppCompatActivity() {
 
@@ -19,10 +22,8 @@ class TvShowDetailActivity : AppCompatActivity() {
 
         val tvshow = intent.getParcelableExtra<Poster>(EXTRA_TV) as Poster
 
-        tvShowModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(TvShowViewModel::class.java)
+        val factory = PopViewModelRequest.getInstance(this)
+        tvShowModel =  ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         //Set For Back Arrow
         binding.back.setOnClickListener {
@@ -48,7 +49,17 @@ class TvShowDetailActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(tvdetail.baseUrl + tvdetail.poster_path)
                 .into(binding.ivTvDetail)
+
+            showLoading(false)
         })
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     companion object {

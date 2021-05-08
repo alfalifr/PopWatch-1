@@ -32,24 +32,11 @@ data class MoviePosterDetail(
     val tagline: String? = null,
 
     @field: SerializedName("status")
-    val status: String? = null,
-
-    @field: SerializedName("production_companies")
-    val production_companies: List<ProductionCompany?>? = null
+    val status: String? = null
 
 ) : Parcelable{
     val baseUrl get() = "https://image.tmdb.org/t/p/w500"
 }
-
-
-@Parcelize
-class ProductionCompany(
-    @field: SerializedName("id")
-    val id: Int,
-
-    @field: SerializedName("name")
-    val name: String? = null
-) : Parcelable
 
 
 @Parcelize

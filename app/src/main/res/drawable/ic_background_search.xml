@@ -14,7 +14,7 @@
             android:width="2dp" />
 
         <size
-            android:width="290dp"
-            android:height="40dp" />
+            android:width="300dp"
+            android:height="65dp" />
 
 </shape>

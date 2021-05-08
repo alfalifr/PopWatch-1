@@ -1,11 +1,13 @@
 package com.mellagusty.movieapppopcorn.ui.movie
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.mellagusty.movieapppopcorn.data.remote.Poster
 import com.mellagusty.movieapppopcorn.databinding.ActivityMovieDetailBinding
+import com.mellagusty.movieapppopcorn.viewmodel.PopViewModelRequest
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -19,10 +21,8 @@ class MovieDetailActivity : AppCompatActivity() {
 
         val movie = intent.getParcelableExtra<Poster>(EXTRA_MOVIE) as Poster
 
-        movieDetailViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(MovieViewModel::class.java)
+        val factory = PopViewModelRequest.getInstance(this)
+        movieDetailViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
         //Set For Back Arrow
         binding.back.setOnClickListener {
@@ -46,8 +46,17 @@ class MovieDetailActivity : AppCompatActivity() {
                 .load(moviedetail.baseUrl+moviedetail.poster_path )
                 .into(binding.ivMovieDetail)
 
+            showLoading(false)
 
         })
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     companion object {

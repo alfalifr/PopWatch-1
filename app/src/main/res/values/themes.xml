@@ -12,5 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- Change searchbarcolor -->
+        <item name="android:editTextColor">@color/yellow_pop</item>
+        <item name="android:textColorHint">@color/yellow_pop</item>
     </style>
 </resources>

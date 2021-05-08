@@ -2,57 +2,63 @@ package com.mellagusty.movieapppopcorn.ui.movie
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.mellagusty.movieapppopcorn.Test.getandwaitValue
+import com.mellagusty.movieapppopcorn.data.DataDummyTest
+import com.mellagusty.movieapppopcorn.data.remote.Repository
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnitRunner
 
-
+@RunWith(MockitoJUnitRunner::class)
 class MovieViewModelTest {
 
     private lateinit var movieViewModel: MovieViewModel
+
+    @Mock
+    private lateinit var repository: Repository
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
-        movieViewModel = MovieViewModel()
+        movieViewModel = MovieViewModel(repository)
     }
 
     //ViewModel ini sudah mengambil data dari API
     @Test
     fun getListMovie() {
+        `when`(repository.getNowPlayingMovie()).thenReturn(DataDummyTest.generateDummyMovies())
         movieViewModel.setNowPlayingMovie()
-        val movielist = movieViewModel.listMovie.getandwaitValue()
+        val movielist = movieViewModel.getNowPlayingMovie()
+        verify(repository).getNowPlayingMovie()
         assertNotNull(movielist)
-        val movie1 = movielist.random()
-        val movie2 = movielist.random()
-        assert(movie1.original_title?.isNotBlank() == true)
-        assert(movie2.release_date?.isNotBlank() == true)
-        println("movie1 = $movie1")
-        println("movie2 =  $movie2")
+        assertEquals(1,movielist.value?.size)
 
     }
 
     @Test
     fun getDetailMovie() {
-        val detailId = "711017"
-        val movieTitle = "Shorta"
-        val movieOverview = "The exact details of what took place while Talib Ben Hassi"
-        val movieLanguage = "da"
-        val movieVoteAverage = 6.1
-        val movieStatus = "Released"
-        movieViewModel.setDetailMovie(detailId)
-        val moviedetail = movieViewModel.detailMovie.getandwaitValue()
-        assertNotNull(moviedetail)
-        assertEquals(moviedetail.id.toString(), detailId)
-        assertEquals(moviedetail.original_title, movieTitle)
-        assert(moviedetail.overview?.contains(movieOverview) == true)
-        assertEquals(moviedetail.original_language, movieLanguage)
-        assertEquals(moviedetail.vote_average, movieVoteAverage)
-        assertEquals(moviedetail.status, movieStatus)
+        val detailMovie = DataDummyTest.generateDummyDetailMovie()
+        val movie_id = detailMovie.value?.id
+
+        `when`(repository.getDetailMovie(movie_id.toString())).thenReturn(detailMovie)
+        movieViewModel.setDetailMovie(movie_id.toString())
+        val movie = movieViewModel.gerDetailMovie()
+        assertNotNull(movie)
+        assertEquals(detailMovie.value?.id, movie.value?.id)
+        assertEquals(detailMovie.value?.original_title, movie.value?.original_title)
+        assertEquals(detailMovie.value?.overview, movie.value?.overview)
+        assertEquals(detailMovie.value?.genres, movie.value?.genres)
+        assertEquals(detailMovie.value?.vote_average, movie.value?.vote_average)
+        assertEquals(detailMovie.value?.tagline, movie.value?.tagline)
+        assertEquals(detailMovie.value?.status, movie.value?.status)
 
 
     }

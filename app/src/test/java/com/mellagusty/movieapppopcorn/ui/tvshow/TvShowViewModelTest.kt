@@ -2,62 +2,61 @@ package com.mellagusty.movieapppopcorn.ui.tvshow
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.mellagusty.movieapppopcorn.Test.getandwaitValue
+import com.mellagusty.movieapppopcorn.data.DataDummyTest
+import com.mellagusty.movieapppopcorn.data.remote.Repository
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class TvShowViewModelTest {
 
     private lateinit var tvShowViewModel: TvShowViewModel
+
+    @Mock
+    private lateinit var repository: Repository
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setup() {
-        tvShowViewModel = TvShowViewModel()
+        tvShowViewModel = TvShowViewModel(repository)
     }
 
     //ViewModel ini sudah mengambil data dari API
     @Test
     fun getListTV() {
+        Mockito.`when`(repository.getPopularTvShow()).thenReturn(DataDummyTest.generateDummyTvShow())
         tvShowViewModel.setPopularTvShow()
-        val tvshowList = tvShowViewModel.listTV.getandwaitValue()
-        assertNotNull(tvshowList)
-        val tvShowList1 = tvshowList.random()
-        val tvShowList2 = tvshowList.random()
-        assert(tvShowList1.original_name?.isNotBlank() == true)
-        assert(tvShowList2.first_air_date?.isNotBlank() == true)
-        println("TvShow1 = $tvShowList1")
-        println("TvShow2 = $tvShowList2")
+        val tvlist = tvShowViewModel.getPopularTvShow()
+        Mockito.verify(repository).getPopularTvShow()
+        Assert.assertNotNull(tvlist)
+        Assert.assertEquals(1, tvlist.value?.size)
     }
 
     @Test
     fun getDetailTV() {
-        val idTV = "71712"
-        val tvName = "The Good Doctor"
-        val tvOverview = "A young surgeon with Savant syndrome is recruited into the surgical"
-        val tvStatus = "Returning Series"
-        val tvVote = 8.6
-        val tvTagLine = "His mind is a mystery, his methods are a miracle."
-        val tvEpisode = 71
-        val tvLanguage = "en"
-        val tvType = "Scripted"
-
-        tvShowViewModel.setDetailTvShow(idTV)
-        val tvdetail = tvShowViewModel.detailTV.getandwaitValue()
-        assertNotNull(tvdetail)
-        assertEquals(tvdetail.id.toString(), idTV)
-        assertEquals(tvdetail.original_name, tvName)
-        assert(tvdetail.overview?.contains(tvOverview) == true)
-        assertEquals(tvdetail.status, tvStatus)
-        assertEquals(tvdetail.vote_average, tvVote)
-        assertEquals(tvdetail.tagline, tvTagLine)
-        assertEquals(tvdetail.number_of_episodes, tvEpisode)
-        assertEquals(tvdetail.original_language, tvLanguage)
-        assertEquals(tvdetail.type, tvType)
+        val detailTvShow = DataDummyTest.generateDummyDetailTvShow()
+        val tv_id = detailTvShow.value?.id
+        Mockito.`when`(repository.getDetailTvShow(tv_id.toString())).thenReturn(detailTvShow)
+        tvShowViewModel.setDetailTvShow(tv_id.toString())
+        val television = tvShowViewModel.getDetailTVShow()
+        Assert.assertNotNull(television)
+        Assert.assertEquals(detailTvShow.value?.id, television.value?.id)
+        Assert.assertEquals(detailTvShow.value?.original_name, television.value?.original_name)
+        Assert.assertEquals(detailTvShow.value?.original_language, television.value?.original_language)
+        Assert.assertEquals(detailTvShow.value?.genres, television.value?.genres)
+        Assert.assertEquals(detailTvShow.value?.overview, television.value?.overview)
+        Assert.assertEquals(detailTvShow.value?.status, television.value?.status)
+        Assert.assertEquals(detailTvShow.value?.vote_average, television.value?.vote_average)
     }
 
 }

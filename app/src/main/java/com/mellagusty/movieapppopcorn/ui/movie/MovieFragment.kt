@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mellagusty.movieapppopcorn.adapter.PopWatchAdapter
 import com.mellagusty.movieapppopcorn.databinding.FragmentMovieBinding
+import com.mellagusty.movieapppopcorn.ui.tvshow.TvShowViewModel
+import com.mellagusty.movieapppopcorn.viewmodel.PopViewModelRequest
 
 class MovieFragment : Fragment() {
 
@@ -31,7 +32,8 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        val factory = PopViewModelRequest.getInstance(requireActivity())
+        movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
         //call the function
         showRecycleCard()
@@ -45,7 +47,7 @@ class MovieFragment : Fragment() {
             Log.d("Movie Fragment", movie[0].id)
             if (movie != null) {
                 adapter.setListData(movie)
-                showLoading(false)
+                false.showLoading()
             }
 
         })
@@ -65,8 +67,8 @@ class MovieFragment : Fragment() {
     }
 
     //Show the progress bar while load
-    private fun showLoading(state: Boolean) {
-        if (state) {
+    private fun Boolean.showLoading() {
+        if (this) {
             binding.progressBar.visibility = View.VISIBLE
         } else {
             binding.progressBar.visibility = View.GONE

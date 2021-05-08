@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mellagusty.movieapppopcorn.adapter.PopWatchAdapter
 import com.mellagusty.movieapppopcorn.databinding.FragmentTvshowBinding
+import com.mellagusty.movieapppopcorn.viewmodel.PopViewModelRequest
 
 class TvShowFragment : Fragment() {
 
@@ -30,7 +31,8 @@ class TvShowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvShowViewModel = ViewModelProvider(this).get(TvShowViewModel::class.java)
+        val factory = PopViewModelRequest.getInstance(requireActivity())
+        tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         //calling function
         showRecycleCard()
