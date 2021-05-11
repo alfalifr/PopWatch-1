@@ -2,7 +2,9 @@
 buildscript {
     ext.kotlin_version = "1.4.32"
     ext{
+        androidCoreTestVersion = '2.1.0'
         mockitoVersion = '3.6.0'
+        mockitoKotlinVersion = '2.2.0'
     }
     repositories {
         google()

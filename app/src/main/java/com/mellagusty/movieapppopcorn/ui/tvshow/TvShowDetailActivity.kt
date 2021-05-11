@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.mellagusty.movieapppopcorn.data.remote.Poster
 import com.mellagusty.movieapppopcorn.databinding.ActivityTvShowDetailBinding
-import com.mellagusty.movieapppopcorn.ui.movie.MovieViewModel
 import com.mellagusty.movieapppopcorn.viewmodel.PopViewModelRequest
 
 class TvShowDetailActivity : AppCompatActivity() {
@@ -23,7 +22,7 @@ class TvShowDetailActivity : AppCompatActivity() {
         val tvshow = intent.getParcelableExtra<Poster>(EXTRA_TV) as Poster
 
         val factory = PopViewModelRequest.getInstance(this)
-        tvShowModel =  ViewModelProvider(this, factory)[TvShowViewModel::class.java]
+        tvShowModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         //Set For Back Arrow
         binding.back.setOnClickListener {

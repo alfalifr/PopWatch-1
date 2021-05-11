@@ -1,11 +1,8 @@
 package com.mellagusty.movieapppopcorn.ui.tvshow
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.mellagusty.movieapppopcorn.Test.getandwaitValue
 import com.mellagusty.movieapppopcorn.data.DataDummyTest
 import com.mellagusty.movieapppopcorn.data.remote.Repository
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNotNull
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -34,7 +31,8 @@ class TvShowViewModelTest {
     //ViewModel ini sudah mengambil data dari API
     @Test
     fun getListTV() {
-        Mockito.`when`(repository.getPopularTvShow()).thenReturn(DataDummyTest.generateDummyTvShow())
+        Mockito.`when`(repository.getPopularTvShow())
+            .thenReturn(DataDummyTest.generateDummyTvShow())
         tvShowViewModel.setPopularTvShow()
         val tvlist = tvShowViewModel.getPopularTvShow()
         Mockito.verify(repository).getPopularTvShow()
@@ -52,7 +50,10 @@ class TvShowViewModelTest {
         Assert.assertNotNull(television)
         Assert.assertEquals(detailTvShow.value?.id, television.value?.id)
         Assert.assertEquals(detailTvShow.value?.original_name, television.value?.original_name)
-        Assert.assertEquals(detailTvShow.value?.original_language, television.value?.original_language)
+        Assert.assertEquals(
+            detailTvShow.value?.original_language,
+            television.value?.original_language
+        )
         Assert.assertEquals(detailTvShow.value?.genres, television.value?.genres)
         Assert.assertEquals(detailTvShow.value?.overview, television.value?.overview)
         Assert.assertEquals(detailTvShow.value?.status, television.value?.status)

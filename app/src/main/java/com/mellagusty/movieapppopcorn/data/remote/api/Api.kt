@@ -6,7 +6,6 @@ import com.mellagusty.movieapppopcorn.data.remote.TvShowPosterDetail
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface Api {
 
@@ -35,7 +34,6 @@ interface Api {
     fun getDetailTvShow(
         @Path("tv_id") query: String
     ): Call<TvShowPosterDetail>
-
 
 
 }

@@ -1,7 +1,6 @@
 package com.mellagusty.movieapppopcorn.ui.movie
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.mellagusty.movieapppopcorn.Test.getandwaitValue
 import com.mellagusty.movieapppopcorn.data.DataDummyTest
 import com.mellagusty.movieapppopcorn.data.remote.Repository
 import org.junit.Assert.assertEquals
@@ -39,7 +38,7 @@ class MovieViewModelTest {
         val movielist = movieViewModel.getNowPlayingMovie()
         verify(repository).getNowPlayingMovie()
         assertNotNull(movielist)
-        assertEquals(1,movielist.value?.size)
+        assertEquals(1, movielist.value?.size)
 
     }
 

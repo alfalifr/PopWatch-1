@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mellagusty.movieapppopcorn.adapter.PopWatchAdapter
 import com.mellagusty.movieapppopcorn.databinding.FragmentMovieBinding
-import com.mellagusty.movieapppopcorn.ui.tvshow.TvShowViewModel
 import com.mellagusty.movieapppopcorn.viewmodel.PopViewModelRequest
 
 class MovieFragment : Fragment() {
